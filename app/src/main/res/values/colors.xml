@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Al-Mizan Color Palette -->
+    <color name="navy_sovereign">#0A1628</color>
+    <color name="blue_royal">#1E3A5F</color>
+    <color name="gold_almizan">#C5A572</color>
+    <color name="bronze">#8B7355</color>
+    
+    <!-- Pastel Colors -->
+    <color name="blue_principal">#6B8CAE</color>
+    <color name="beige_dore">#E8D5B7</color>
+    <color name="blue_clair">#A8C5E0</color>
+    <color name="gris_bleu">#8B9DAF</color>
+    
+    <!-- Cyan from logo -->
+    <color name="cyan_almizan">#7BC4C4</color>
+    
+    <!-- Neutral Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="background">#F7F9FB</color>
+    
+    <!-- Launcher Icon Background -->
+    <color name="ic_launcher_background">#0A1628</color>
+</resources>
