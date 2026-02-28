@@ -33,12 +33,15 @@ import dz.gov.almizan.ui.theme.AlMizanPastelColors
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit
+    onLoginSuccess: () -> Unit,
+    onRegisterClick: () -> Unit = {},
+    onForgotPasswordClick: () -> Unit = {}
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var rememberMe by remember { mutableStateOf(false) }
+    var isLoading by remember { mutableStateOf(false) }
     
     Box(
         modifier = Modifier
@@ -185,7 +188,7 @@ fun LoginScreen(
                             )
                         }
                         
-                        TextButton(onClick = { /* Handle forgot password */ }) {
+                        TextButton(onClick = onForgotPasswordClick) {
                             Text(
                                 text = "Mot de passe oublié ?",
                                 style = MaterialTheme.typography.bodySmall,
@@ -197,12 +200,26 @@ fun LoginScreen(
                     Spacer(modifier = Modifier.height(24.dp))
                     
                     // Login Button
-                    AlMizanButton(
-                        text = "Se connecter",
-                        onClick = onLoginSuccess,
-                        modifier = Modifier.fillMaxWidth(),
-                        variant = ButtonVariant.Primary
-                    )
+                    if (isLoading) {
+                        Box(
+                            modifier = Modifier.fillMaxWidth().height(50.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator(
+                                color = AlMizanColors.GoldAlMizan,
+                                strokeWidth = 2.dp,
+                                modifier = Modifier.size(28.dp)
+                            )
+                        }
+                    } else {
+                        AlMizanButton(
+                            text = "Se connecter",
+                            onClick = { isLoading = true; onLoginSuccess() },
+                            modifier = Modifier.fillMaxWidth(),
+                            variant = ButtonVariant.Primary,
+                            enabled = email.isNotBlank() && password.isNotBlank()
+                        )
+                    }
                     
                     Spacer(modifier = Modifier.height(16.dp))
                     
@@ -217,7 +234,7 @@ fun LoginScreen(
                             color = AlMizanPastelColors.TextSecondary
                         )
                         TextButton(
-                            onClick = { /* Handle register */ },
+                            onClick = onRegisterClick,
                             contentPadding = PaddingValues(0.dp)
                         ) {
                             Text(
